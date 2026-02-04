@@ -11,6 +11,8 @@
             --card-bg: #ffffff;
             --text: #333333;
             --secondary-text: #666666;
+            --msg-in: #ffffff;
+            --msg-out: #effdde;
         }
 
         body {
@@ -21,7 +23,6 @@
             line-height: 1.6;
         }
 
-        /* Навігація */
         nav {
             background: var(--card-bg);
             padding: 15px 20px;
@@ -43,14 +44,107 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 40px auto;
             padding: 0 20px;
         }
 
-        h1, h2 { color: var(--text); }
+        h1, h2 { color: var(--text); text-align: center; }
         
-        /* Картки функцій */
+        .hero-text {
+            text-align: center;
+            color: #666; 
+            max-width: 600px; 
+            margin: 0 auto 40px auto;
+        }
+
+        /* --- Секція Демонстрації (Телефони) --- */
+        .demo-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .phone-mockup {
+            width: 300px;
+            background: #72bda3; /* Колір фону чату Telegram */
+            background-image: radial-gradient(#6fb399 15%, transparent 16%), radial-gradient(#6fb399 15%, transparent 16%);
+            background-size: 20px 20px;
+            border: 12px solid #333;
+            border-radius: 35px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .phone-header {
+            background: #517da2;
+            padding: 15px;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .phone-header::before {
+            content: "⬅";
+            margin-right: 10px;
+        }
+
+        .chat-area {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            height: 400px; /* Висота екрану */
+        }
+
+        .msg {
+            padding: 8px 12px;
+            border-radius: 12px;
+            font-size: 13px;
+            max-width: 85%;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .msg-out {
+            background: var(--msg-out);
+            align-self: flex-end;
+            border-bottom-right-radius: 2px;
+        }
+
+        .msg-in {
+            background: var(--msg-in);
+            align-self: flex-start;
+            border-bottom-left-radius: 2px;
+        }
+
+        .msg-img {
+            width: 100%;
+            height: 120px;
+            background: #eee;
+            border-radius: 8px;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #aaa;
+            font-size: 24px;
+        }
+        
+        .msg-time {
+            font-size: 10px;
+            color: #888;
+            text-align: right;
+            margin-top: 4px;
+        }
+
+        /* --- Кінець Демонстрації --- */
+
         .feature-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -71,7 +165,6 @@
         .card h3 { margin-top: 0; margin-bottom: 10px; }
         .card p { color: var(--secondary-text); font-size: 14px; margin: 0; }
 
-        /* Список команд */
         .command-list {
             background: var(--card-bg);
             border-radius: 16px;
@@ -85,7 +178,7 @@
             padding: 15px 20px;
             align-items: center;
         }
-
+        
         .command-item:last-child { border-bottom: none; }
 
         .cmd {
@@ -101,7 +194,6 @@
 
         .cmd-desc { font-size: 14px; color: var(--secondary-text); }
 
-        /* Футер */
         footer {
             text-align: center;
             padding: 40px 0;
@@ -126,41 +218,67 @@
     <nav>
         <a href="index.html" class="nav-logo">📅</a>
         <div class="nav-links">
-            <a href="index.html">Головна</a>
+            <a href="index.html">На Головну</a>
         </div>
     </nav>
 
     <div class="container">
-        <div style="text-align: center; margin-bottom: 50px;">
-            <h1>Можливості бота</h1>
-            <p style="color: #666; max-width: 600px; margin: 0 auto;">
-                Цей бот створений, щоб зробити перегляд розкладу в НУНГ максимально зручним. 
-                Забудьте про сайт деканату — розклад тепер у вашому Telegram.
-            </p>
-            <a href="index.html" class="cta-button">Підключити свою групу</a>
+        <h1>Як це виглядає?</h1>
+        <p class="hero-text">Бот надсилає розклад у зручному форматі картинки, а також повідомляє про зміни в реальному часі.</p>
+
+        <div class="demo-section">
+            
+            <div class="phone-mockup">
+                <div class="phone-header">Bot NUNG Розклад</div>
+                <div class="chat-area">
+                    <div class="msg msg-out">
+                        /today
+                        <div class="msg-time">08:00</div>
+                    </div>
+                    <div class="msg msg-in">
+                        <div class="msg-img">🖼️ Розклад</div>
+                        📅 <b>Сьогодні: КІ-24-1</b><br>
+                        <br>
+                        🔗 <b>Посилання:</b><br>
+                        1️⃣ Математика: <a href="#">Zoom 🎥</a>
+                        <div class="msg-time">08:00</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="phone-mockup">
+                <div class="phone-header">Bot NUNG Розклад</div>
+                <div class="chat-area">
+                    <div class="msg msg-in">
+                        🔄 <b>Зміни у розкладі:</b><br><br>
+                        ❌ <b>Скасовано (04.02 | 09:30):</b><br>
+                        <s>📚 Фізика (Лек)</s><br><br>
+                        ✅ <b>Додано (04.02 | 11:00):</b><br>
+                        📚 Програмування<br>
+                        📍 412.ауд.
+                        <div class="msg-time">09:15</div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-        <h2>✨ Основні функції</h2>
+        <h2>✨ Чому це зручно</h2>
         <div class="feature-grid">
-            <div class="card">
-                <span class="icon">🔔</span>
-                <h3>Автоматичні сповіщення</h3>
-                <p>Бот надсилає розклад щоранку о 7:00 та зведення на тиждень у неділю. Ви ніколи не пропустите першу пару.</p>
-            </div>
-            <div class="card">
-                <span class="icon">🔄</span>
-                <h3>Моніторинг змін</h3>
-                <p>Якщо деканат змінить аудиторію або скасує пару, бот надішле миттєве сповіщення про зміни.</p>
-            </div>
             <div class="card">
                 <span class="icon">🖼️</span>
                 <h3>Розклад картинкою</h3>
-                <p>Отримуйте красиву картинку з розкладом на день або тиждень, яку зручно зберегти в галерею.</p>
+                <p>Отримуйте естетичну картинку з розкладом, яку зручно зберегти в галерею або переслати старості.</p>
             </div>
             <div class="card">
                 <span class="icon">🔗</span>
-                <h3>Посилання на пари</h3>
-                <p>Zoom, Meet, Teams — посилання на онлайн-заняття підтягуються автоматично під кожну пару.</p>
+                <h3>Посилання в один клік</h3>
+                <p>Більше не треба шукати посилання в чатах. Натисніть кнопку під розкладом і ви вже на парі.</p>
+            </div>
+            <div class="card">
+                <span class="icon">⚡</span>
+                <h3>Миттєві зміни</h3>
+                <p>Бот моніторить сайт деканату кожні 30 хвилин. Якщо пару перенесли — ви дізнаєтесь першим.</p>
             </div>
         </div>
 
@@ -168,11 +286,7 @@
         <div class="command-list">
             <div class="command-item">
                 <span class="cmd">/today</span>
-                <span class="cmd-desc">Отримати розклад на сьогодні (картинкою).</span>
-            </div>
-            <div class="command-item">
-                <span class="cmd">/tomorrow</span>
-                <span class="cmd-desc">Подивитись, що буде завтра.</span>
+                <span class="cmd-desc">Отримати розклад на сьогодні.</span>
             </div>
             <div class="command-item">
                 <span class="cmd">/week</span>
@@ -180,20 +294,21 @@
             </div>
             <div class="command-item">
                 <span class="cmd">/settings</span>
-                <span class="cmd-desc">Налаштування сповіщень (щоденні, тижневі, зміни).</span>
+                <span class="cmd-desc">Налаштування ранкових сповіщень.</span>
             </div>
             <div class="command-item">
-                <span class="cmd">/search [прізвище]</span>
-                <span class="cmd-desc">Знайти, де зараз знаходиться викладач. Наприклад: <code>/search Коваль</code></span>
+                <span class="cmd">/search</span>
+                <span class="cmd-desc">Знайти викладача або предмет.</span>
             </div>
             <div class="command-item">
-                <span class="cmd">/group [група]</span>
-                <span class="cmd-desc">Змінити групу. Наприклад: <code>/group КІ-24-1</code></span>
+                <span class="cmd">/group</span>
+                <span class="cmd-desc">Змінити навчальну групу.</span>
             </div>
         </div>
 
         <footer>
-            <p>Розроблено для студентів НУНГ ❤️</p>
+            <a href="index.html" class="cta-button">Підключити Бота</a>
+            <p style="margin-top: 20px">Розроблено для студентів НУНГ ❤️</p>
         </footer>
     </div>
 
