@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Швидкий старт | НУНГ Розклад</title>
+    <style>
+        :root {
+            --primary: #0088cc; /* Telegram Blue */
+            --bg: #f5f5f5;
+            --card-bg: #ffffff;
+            --text: #333333;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        p {
+            color: #666;
+            margin-bottom: 24px;
+            font-size: 14px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            font-size: 18px;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            box-sizing: border-box;
+            text-transform: uppercase;
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 12px;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.1s, background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #007ebd;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .logo {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="logo">📅</div>
+        <h1>Мій Розклад НУНГ</h1>
+        <p>Введіть назву групи, щоб підключити бота</p>
+
+        <div class="input-group">
+            <input type="text" id="groupInput" placeholder="Наприклад: КІ-24-1" autofocus>
+        </div>
+
+        <button onclick="openBot()">Підключити Бот</button>
+    </div>
+
+    <script>
+        // Вставте сюди юзернейм вашого бота (без @)
+        const BOT_USERNAME = "NUNG_RozkladBot"; 
+
+        function openBot() {
+            const input = document.getElementById('groupInput');
+            let groupName = input.value.trim().toUpperCase();
+
+            if (!groupName) {
+                input.style.borderColor = "red";
+                setTimeout(() => input.style.borderColor = "#ddd", 2000);
+                return;
+            }
+
+            // Магія транслітерації: Кирилиця -> Латиниця (візуально схожі)
+            // Це потрібно, бо Telegram API не приймає кирилицю в параметрі start
+            const mapping = {
+                'А': 'A', 'В': 'B', 'Е': 'E', 'І': 'I', 
+                'К': 'K', 'М': 'M', 'Н': 'H', 'О': 'O', 
+                'Р': 'P', 'С': 'C', 'Т': 'T', 'Х': 'X',
+                ' ': '-', '_': '-' // замінюємо пробіли на дефіс
+            };
+
+            let safeGroupName = '';
+            for (let char of groupName) {
+                // Якщо символ є в мапі - міняємо, якщо ні - лишаємо як є (цифри, дефіси)
+                safeGroupName += mapping[char] || char;
+            }
+
+            // Формуємо посилання
+            const telegramUrl = `https://t.me/${BOT_USERNAME}?start=${safeGroupName}`;
+
+            // Відкриваємо
+            window.location.href = telegramUrl;
+        }
+
+        // Додаємо обробку натискання Enter
+        document.getElementById('groupInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                openBot();
+            }
+        });
+    </script>
+
+</body>
+</html>
